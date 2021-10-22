@@ -2,9 +2,15 @@ import PropTypes from 'prop-types';
 import Button from "./Button";
 import styles from './Form.module.css';
 
-const Form = ({ children, footerContent }) => {
+const Form = ({ children, footerContent, onSubmit }) => {
     return(
-        <form className={styles.form}>
+        <form
+            className={styles.form}
+            onSubmit={(e) => {
+                e.preventDefault()
+                onSubmit({some:'data'})
+            }}
+        >
             {
                 children ?
                     children :
