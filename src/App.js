@@ -10,7 +10,7 @@ const App = () => {
         footerContent={
           <React.Fragment>
             <Button>Save changes</Button>
-            <Button>Discard</Button>
+            <Button disabled>Discard</Button>
           </React.Fragment>
         }
       >
