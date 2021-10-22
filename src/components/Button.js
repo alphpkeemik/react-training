@@ -10,7 +10,8 @@ const Button = (props) => {
         <button className={classNames(
             styles.button,
             {
-                [styles.disabled]: false
+                [styles.button]: true,
+                [styles.disabled]: disabled
             }
         )} disabled={disabled}>
             {children}
