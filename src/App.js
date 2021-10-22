@@ -5,15 +5,17 @@ import Form from './components/Form';
 import Input from './components/Input';
 
 const defaultSignupFormState = {
-    username: '',
+    username: 'initial',
     password: '',
     email: '',
 }
 
 const App = () => {
-    const handleDismiss = (e) => {e.preventDefault()}
+    const handleDismiss = (e) => {
+        setSignupFormData(defaultSignupFormState)
+    }
     const handleSubmit = (data) => {
-        console.log(data)
+        console.log(signupFormData)
     }
     const setFormFieldUpdate = (field, newValue) => {
         setSignupFormData((prevState) => {
@@ -41,10 +43,12 @@ const App = () => {
         <Input
          placeholder='Email'
          onChange={handleFormFieldUpdate('email')}
+         value={signupFormData.email}
         />
         <Input
          placeholder='Username'
          onChange={handleFormFieldUpdate('username')}
+         value={signupFormData.username}
         />
           <pre>
               {JSON.stringify(signupFormData)}

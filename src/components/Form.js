@@ -8,7 +8,7 @@ const Form = ({ children, footerContent, onSubmit }) => {
             className={styles.form}
             onSubmit={(e) => {
                 e.preventDefault()
-                onSubmit({some:'data'})
+                onSubmit()
             }}
         >
             {
