@@ -1,0 +1,9 @@
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formFooter {
+    padding: 8px;
+    border-top: darkcyan solid 1px;
+}

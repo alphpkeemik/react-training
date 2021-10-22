@@ -2,9 +2,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import styles from "./Button.module.css";
 
-const config = {
-    getDefaultButtonText: () => 'Fill me!!!',
-}
 
 const Button = (props) => {
     const { children, disabled, prefix } = props;
