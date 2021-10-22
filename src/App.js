@@ -6,9 +6,17 @@ import Button from './components/Button';
 const App = () => {
   return (
     <div className="App">
-      <Button disabled={'this is a string instead'}>
+      <Button prefix="+372">
           Click me!!!!
       </Button>
+
+      <Button disabled>
+        Dont click me, I wont do anything
+      </Button>
+
+      <div className='Button'>
+        I should not render as a buttonm
+      </div>
     </div>
   );
 }

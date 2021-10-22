@@ -1,27 +1,33 @@
 import PropTypes from "prop-types";
 import React from "react";
-import "./Button.css";
+import styles from "./Button.module.css";
 
 const config = {
     getDefaultButtonText: () => 'Fill me!!!',
 }
 
 const Button = (props) => {
-    const { children, disabled,} = props;
-    console.log({ children });
+    const { children, disabled, prefix } = props;
+
+    if (prefix) {
+        return (
+            <button className={[styles.button, styles.buttonPrefix].join(' ')} disabled={disabled}>
+                {prefix} {children}
+            </button>
+        );
+    }
+
     return (
-        <button className="Button" disabled={disabled}>
+        <button className={styles.button} disabled={disabled}>
             {children}
         </button>
     );
 };
 
 Button.propTypes = {
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    prefix: PropTypes.string
 }
 
-Button.defaultProps = {
-    prefix: '+372'
-}
 
 export default Button;

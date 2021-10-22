@@ -1,4 +1,4 @@
-.Button {
+.button {
     background-color: cornflowerblue;
     color: white;
     border: none;
@@ -8,6 +8,10 @@
     border: 2px solid cornflowerblue;
 }
 
-.Button:active {
+.buttonPrefix {
+    background-color: darkcyan;
+}
+
+.button:active {
     border: 2px solid rgb(65, 83, 117);
 }
