@@ -1,0 +1,19 @@
+.todo {
+    background-color: var(--lavender);
+    border: 2px solid var(--gray);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.todoTile {
+    font-size: 1.2em;
+    text-decoration: underline;
+}
+
+.todoContent {
+
+}
+

@@ -5,6 +5,7 @@ import Form from './components/Form';
 import Input from './components/Input';
 import RenderListSample from "./renderListSample";
 import NewTodo from "./NewTodo";
+import Todo from "./Todo";
 
 const defaultSignupFormState = {
     username: 'initial',
@@ -40,10 +41,17 @@ const App = () => {
         })
     }
 
-
+    const renderTodo = ({title, content, done}) => {
+        return <Todo title={title} content={content} done={done}/>
+    }
     return (
     <div className="App">
         <NewTodo onSubmit={onNewTodo} />
+        <div className="todos">
+            {
+                todos.map(renderTodo)
+            }
+        </div>
         <pre>
               {JSON.stringify(todos)}
           </pre>
