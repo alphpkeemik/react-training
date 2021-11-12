@@ -8,7 +8,9 @@ const TodoContext = createContext({
     ],
     setTodos: (todos) => {
 
-    }
+    },
+    getTodoById: (id) => ({}),
+    editTodo: (id, changes) => {},
 })
 
 export default TodoContext;

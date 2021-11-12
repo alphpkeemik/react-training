@@ -54,6 +54,7 @@ function Todos() {
 
     const renderTodo = ({id, title, content, done}) => {
         return <Todo
+            id={id}
             toggleDoneState={() =>toggleTodoDone(id, !done)}
             key={id}
             title={title}
