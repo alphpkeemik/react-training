@@ -29,8 +29,8 @@ function NewTodo({onSubmit}) {
                       </React.Fragment>
                   }
             >
-                <Input onChange={e => handleFieldChange("title", e)} label="title" placeholder="title" value={formState.title} />
-                <Input onChange={e => handleFieldChange("content", e)} label="content" placeholder="content" value={formState.content}/>
+                <Input onChange={e => handleFieldChange("title", e)} label="title" label="title" value={formState.title} />
+                <Input onChange={e => handleFieldChange("content", e)} label="content" label="content" value={formState.content}/>
                 <Button />
             </Form>
         </div>
