@@ -1,13 +1,17 @@
 import './App.css';
 import React from 'react';
 import Router from "./pages";
+import Navbar from "./components/Navbar";
 
 const App = () => {
 
 
     return (
     <div className="App">
-        <Router/>
+        <Navbar />
+        <section className="content">
+            <Router/>
+        </section>
     </div>
   );
 }

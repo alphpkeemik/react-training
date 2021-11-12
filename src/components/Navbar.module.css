@@ -1,0 +1,13 @@
+.navbar {
+    display: flex;
+    background-color: var(--lavender);
+    font-family: var(--title-font);
+    margin: 10px;
+}
+
+.navLink {
+    padding: 10px 20px;
+}
+.navLink:hover {
+    background-color: #A62639;
+}
