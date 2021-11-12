@@ -3,6 +3,7 @@ import React from 'react';
 import Button from './components/Button';
 import Form from './components/Form';
 import Input from './components/Input';
+import RenderListSample from "./renderListSample";
 
 const defaultSignupFormState = {
     username: 'initial',
@@ -31,6 +32,8 @@ const App = () => {
     const [signupFormData, setSignupFormData] = React.useState(defaultSignupFormState)
   return (
     <div className="App">
+        <RenderListSample />
+        <hr />
       <Form
           onSubmit={handleSubmit}
         footerContent={

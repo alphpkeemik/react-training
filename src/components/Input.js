@@ -1,15 +1,9 @@
 import React from 'react';
 import styles from './Input.module.css';
 
-const Input = ({placeholder, value: inputValueFromParent, onChange}) => {
-    const [inputValue, setInputValue] = React.useState(inputValueFromParent)
-    React.useEffect(() => {
-        if (inputValueFromParent !== inputValue) {
-            setInputValue(inputValueFromParent)
-        }
-    }, [inputValueFromParent, inputValue]);
+const Input = ({placeholder, value, onChange}) => {
+
     const handleOnChange = (e) => {
-        setInputValue(e.target.value)
         onChange(e.target.value)
     }
     return (
@@ -17,7 +11,7 @@ const Input = ({placeholder, value: inputValueFromParent, onChange}) => {
             <input
                 className={styles.input}
                 placeholder={placeholder.toUpperCase()}
-                value={inputValue}
+                value={value}
                 onChange={handleOnChange}
             />
         </div>
