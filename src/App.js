@@ -37,16 +37,18 @@ const App = () => {
 
     const [todos, setTodos] = React.useState([])
 
-    React.useEffect(() => {
-        //every time dependency changed or component mounted
-        const unDoneTodos = todos.filter(todo => {
+    const unDoneTodoCount = React.useMemo(() => {
+        return todos.filter(todo => {
             return !todo.done
-        })
-        document.title = 'Amount of undone todos: ' + unDoneTodos.length
+        }).length;
+    }, [todos])
+
+    React.useEffect(() => {
+        document.title = 'Amount of undone todos: ' + unDoneTodoCount
         return () => {
             console.log('removed')
         }
-    }, [todos])
+    }, [unDoneTodoCount])
 
     const onNewTodo = (todo) => {
         if (!(todo.title || todo.content)) {
