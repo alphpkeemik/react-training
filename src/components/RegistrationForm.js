@@ -58,7 +58,6 @@ const RegistrationForm = () => {
         <div>
             <form onSubmit={formic.handleSubmit}
                   autoComplete="off"
-                  aria-autocomplete="off"
             >
                 <Input placeholder="Username" name="username" type="text"
                        value={formic.values.username}
@@ -83,7 +82,7 @@ const RegistrationForm = () => {
                        onBlur={formic.handleBlur}
                 />
 
-                <Button>Register</Button>
+                <Button type="submit">Register</Button>
             </form>
         </div>
     );

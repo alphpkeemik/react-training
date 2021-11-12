@@ -25,7 +25,6 @@ export default function Input({
                 onBlur={onBlur}
                 value={value}
                 autoComplete="off"
-                aria-autocomplete="off"
             />
             {error && <span className={styles.errorMessage}>{error}</span>}
         </div>

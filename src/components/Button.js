@@ -4,7 +4,7 @@ import styles from "./Button.module.css";
 import classNames from "classnames";
 
 const Button = (props) => {
-    const { children, disabled, variant, onClick } = props;
+    const { children, disabled, variant, onClick, type } = props;
 
     return (
         <button onClick={onClick}  className={classNames(
@@ -14,7 +14,10 @@ const Button = (props) => {
                 [styles.disabled]: disabled,
                 [styles.variantDismiss]: variant === 'dismiss'
             }
-        )} disabled={disabled}>
+        )}
+                disabled={disabled}
+                type={type || 'submit'}
+        >
             {children}
         </button>
     );
