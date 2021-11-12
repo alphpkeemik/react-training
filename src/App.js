@@ -6,6 +6,7 @@ import Input from './components/Input';
 import RenderListSample from "./renderListSample";
 import NewTodo from "./NewTodo";
 import Todo from "./Todo";
+import {v4} from "uuid";
 
 const defaultSignupFormState = {
     username: 'initial',
@@ -36,13 +37,17 @@ const App = () => {
 
     const [todos, setTodos] = React.useState([])
     const onNewTodo = (todo) => {
+        const newTodo = {
+            ...todo,
+            id: v4()
+        }
         setTodos((prevState) => {
-            return [...prevState, todo];
+            return [...prevState, newTodo];
         })
     }
 
-    const renderTodo = ({title, content, done}) => {
-        return <Todo title={title} content={content} done={done}/>
+    const renderTodo = ({title, content, done, id}) => {
+        return <Todo key={id} title={title} content={content} done={done}/>
     }
     return (
     <div className="App">
