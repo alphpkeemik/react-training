@@ -2,10 +2,11 @@ import React from "react";
 import Todo from "../Todo";
 import NewTodo from "../NewTodo";
 import {v4} from "uuid";
+import TodoContext from "../contexts/TodoContext";
 
 function Todos() {
 
-    const [todos, setTodos] = React.useState([])
+    const {todos, setTodos} = React.useContext(TodoContext)
 
     const unDoneTodoCount = React.useMemo(() => {
         return todos.filter(todo => {
@@ -68,9 +69,7 @@ function Todos() {
                     todos.map(renderTodo)
                 }
             </div>
-            <pre>
-              {JSON.stringify(todos)}
-          </pre>
+
         </div>
     );
 }
