@@ -1,8 +1,8 @@
 import React from "react";
 import Button from "./Button";
-import Input from "./Input";
 import {useFormik} from 'formik';
 import *  as Yup from "yup";
+import FormikInput from "./Formik/FormikInput";
 
 const RegistrationForm = () => {
 
@@ -34,7 +34,7 @@ const RegistrationForm = () => {
     })
 
 
-    const formic = useFormik({
+    const formik = useFormik({
         initialValues: {
             username: "",
             password: "",
@@ -49,30 +49,20 @@ const RegistrationForm = () => {
     })
     return (
         <div>
-            <form onSubmit={formic.handleSubmit}
+            <form onSubmit={formik.handleSubmit}
                   autoComplete="off"
             >
-                <Input placeholder="Username" name="username" type="text"
-                       value={formic.values.username}
-                       error={formic.touched.username && formic.errors.username}
-                       onChange={formic.handleChange}
-                       onBlur={formic.handleBlur}
+                <FormikInput label="Username" name="username" type="text"
+                             formik={formik}
                 />
-                <Input placeholder="Password" name="password" type="password" value={formic.values.password}
-                       error={formic.touched.password && formic.errors.password}
-                       onChange={formic.handleChange}
-                       onBlur={formic.handleBlur}
+                <FormikInput label="Password" name="password" type="password"
+                             formik={formik}
                 />
-                <Input placeholder="re-password" name="confirmPassword" type="password"
-                       error={formic.touched.confirmPassword && formic.errors.confirmPassword}
-                       value={formic.values.confirmPassword}
-                       onChange={formic.handleChange}
-                       onBlur={formic.handleBlur}
+                <FormikInput label="re-password" name="confirmPassword" type="password"
+                             formik={formik}
                 />
-                <Input placeholder="-Email" name="email" type="email" value={formic.values.email}
-                       error={formic.touched.email && formic.errors.email}
-                       onChange={formic.handleChange}
-                       onBlur={formic.handleBlur}
+                <FormikInput label="-Email" name="email" type="email"
+                             formik={formik}
                 />
 
                 <Button type="submit">Register</Button>
