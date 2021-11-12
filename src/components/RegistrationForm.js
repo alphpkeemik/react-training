@@ -62,19 +62,28 @@ const RegistrationForm = () => {
             >
                 <Input placeholder="Username" name="username" type="text"
                        value={formic.values.username}
-                       error={formic.errors.username}
-                       onChange={formic.handleChange}/>
+                       error={formic.touched.username && formic.errors.username}
+                       onChange={formic.handleChange}
+                       onBlur={formic.handleBlur}
+                />
                 <Input placeholder="Password" name="password" type="password" value={formic.values.password}
-                       error={formic.errors.password}
-                       onChange={formic.handleChange}/>
+                       error={formic.touched.password && formic.errors.password}
+                       onChange={formic.handleChange}
+                       onBlur={formic.handleBlur}
+                />
                 <Input placeholder="re-password" name="confirmPassword" type="password"
-                       error={formic.errors.confirmPassword}
-                       value={formic.values.confirmPassword} onChange={formic.handleChange}/>
+                       error={formic.touched.confirmPassword && formic.errors.confirmPassword}
+                       value={formic.values.confirmPassword}
+                       onChange={formic.handleChange}
+                       onBlur={formic.handleBlur}
+                />
                 <Input placeholder="-Email" name="email" type="email" value={formic.values.email}
-                       error={formic.errors.email}
-                       onChange={formic.handleChange}/>
+                       error={formic.touched.email && formic.errors.email}
+                       onChange={formic.handleChange}
+                       onBlur={formic.handleBlur}
+                />
 
-                <Button >Register</Button>
+                <Button>Register</Button>
             </form>
         </div>
     );
