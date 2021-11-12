@@ -4,6 +4,7 @@ import Button from './components/Button';
 import Form from './components/Form';
 import Input from './components/Input';
 import RenderListSample from "./renderListSample";
+import NewTodo from "./NewTodo";
 
 const defaultSignupFormState = {
     username: 'initial',
@@ -30,8 +31,23 @@ const App = () => {
     const handleFormFieldUpdate = (field) => (value) => setFormFieldUpdate(field, value);
 
     const [signupFormData, setSignupFormData] = React.useState(defaultSignupFormState)
-  return (
+
+
+    const [todos, setTodos] = React.useState([])
+    const onNewTodo = (todo) => {
+        setTodos((prevState) => {
+            return [...prevState, todo];
+        })
+    }
+
+
+    return (
     <div className="App">
+        <NewTodo onSubmit={onNewTodo} />
+        <pre>
+              {JSON.stringify(todos)}
+          </pre>
+        <hr />
         <RenderListSample />
         <hr />
       <Form

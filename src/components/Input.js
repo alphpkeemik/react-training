@@ -4,7 +4,7 @@ import styles from './Input.module.css';
 const Input = ({placeholder, value, onChange}) => {
 
     const handleOnChange = (e) => {
-        onChange(e.target.value)
+        onChange?.(e.target.value)
     }
     return (
         <div className={styles.inputContainer}>
