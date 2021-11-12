@@ -2,44 +2,37 @@ import React from "react";
 import Button from "./Button";
 import Input from "./Input";
 import {useFormik} from 'formik';
-const emailRegularExpression = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+import *  as Yup from "yup";
 
 const RegistrationForm = () => {
 
+    Yup.addMethod(Yup.string, 'sameAs', function (ref, message) {
+        return this.test('sameAS', message, function (value) {
+            const other = this.resolve(ref);
+            return value === other;
+        })
+    })
 
-    const validate = (values) => {
-        const errors = {}
-        if (!values.username) {
-            errors.username = 'Username is required';
-        } else if (values.username.length < 3) {
-            errors.username = 'Username must be at least 3 chars length';
-        } else if (values.username.length > 16) {
-            errors.username = 'Username needs to ne 16 characters or less';
-        }
+    const RegistrationFormSchema = Yup.object({
+        username: Yup.string()
+            .min(3, "Username must be at least 3 chars length")
+            .max(16, 'Username needs to ne 16 characters or less')
+            .required(),
+        password: Yup.string()
+            .min(8, 'Password must be at least 3 chars length')
+            .max(255, 'Password needs to ne 16 characters or less')
+            .required('Password is required')
+            .matches(/[0-9]/, "Mustr contain numbers")
+            .matches(/[a-z]/, "Must contain lowercase")
+            .matches(/[A-Z]/, "Must contain uppercase"),
+        email: Yup.string().email().required(),
+        confirmPassword: Yup.string()
+            .sameAs(
+                Yup.ref('password'),
+                "Passwords need to match"
+            )
+    })
 
-        if (!values.password) {
-            errors.password = 'Password is required';
-        } else if (!(
-            /[0-9]/.test(values.password)
-            &&
-            /[a-z]/.test(values.password)
-            &&
-            /[A-X]/.test(values.password)
-        )) {
-            errors.password = 'Password must contains numbers, uppercase and lowercase letters';
-        } else if (values.password.length < 8) {
-            errors.password = 'Password must be at least 3 chars length';
-        } else if (values.username.length > 100) {
-            errors.username = 'Password needs to ne 100 characters or less';
-        }
-        if (values.confirmPassword !== values.password) {
-            errors.confirmPassword = 'Passwords need to match';
-        }
-        if (!emailRegularExpression.test(values.email)) {
-            errors.email = 'Email not valid';
-        }
-        return errors;
-    }
 
     const formic = useFormik({
         initialValues: {
@@ -48,7 +41,7 @@ const RegistrationForm = () => {
             confirmPassword: "",
             email: "",
         },
-        validate,
+        validationSchema: RegistrationFormSchema,
         onSubmit: (e) => {
             console.log(e)
             console.log('submit')
