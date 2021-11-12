@@ -1,21 +1,33 @@
-import React from 'react';
-import styles from './Input.module.css';
+import classnames from "classnames";
+import React from "react";
 
-const Input = ({placeholder, value, onChange}) => {
+const styles = require("./Input.module.css");
 
-    const handleOnChange = (e) => {
-        onChange?.(e.target.value)
-    }
+export default function Input({
+                                  value,
+                                  type,
+                                  onChange,
+                                  onBlur,
+                                  error,
+                                  label,
+                                  placeholder,
+                                  name,
+                              }) {
     return (
         <div className={styles.inputContainer}>
+            <div className={styles.label}>{label}</div>
             <input
-                className={styles.input}
-                placeholder={placeholder.toUpperCase()}
+                type={type}
+                className={classnames(styles.input, {[styles.error]: !!error})}
+                name={name}
+                placeholder={placeholder}
+                onChange={onChange}
+                onBlur={onBlur}
                 value={value}
-                onChange={handleOnChange}
+                autoComplete="off"
+                aria-autocomplete="off"
             />
+            {error && <span className={styles.errorMessage}>{error}</span>}
         </div>
     );
 }
-
-export default Input;

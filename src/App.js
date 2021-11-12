@@ -3,6 +3,7 @@ import React from 'react';
 import Button from './components/Button';
 import Form from './components/Form';
 import Input from './components/Input';
+import RegistrationForm from './components/RegistrationForm';
 import RenderListSample from "./renderListSample";
 import NewTodo from "./NewTodo";
 import Todo from "./Todo";
@@ -92,6 +93,8 @@ const App = () => {
     }
     return (
     <div className="App">
+        <RegistrationForm />
+        <hr />
         <NewTodo onSubmit={onNewTodo} />
         <div className="todos">
             {
