@@ -36,8 +36,20 @@ const App = () => {
 
 
     const [todos, setTodos] = React.useState([])
+
+    React.useEffect(() => {
+        //every time dependency changed or component mounted
+        const unDoneTodos = todos.filter(todo => {
+            return !todo.done
+        })
+        document.title = 'Amount of undone todos: ' + unDoneTodos.length
+        return () => {
+            console.log('removed')
+        }
+    }, [todos])
+
     const onNewTodo = (todo) => {
-        if(!(todo.title || todo.content)) {
+        if (!(todo.title || todo.content)) {
             return
         }
         const newTodo = {
