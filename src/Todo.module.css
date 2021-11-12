@@ -7,10 +7,16 @@
     flex-direction: column;
     width: 300px;
 }
+.done {
+    opacity: 0.5;
+}
 
 .todoTile {
     font-size: 1.2em;
     text-decoration: underline;
+}
+.done .todoTile {
+    text-decoration: line-through;
 }
 
 .todoContent {

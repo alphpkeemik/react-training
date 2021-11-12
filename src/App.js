@@ -37,6 +37,9 @@ const App = () => {
 
     const [todos, setTodos] = React.useState([])
     const onNewTodo = (todo) => {
+        if(!(todo.title || todo.content)) {
+            return
+        }
         const newTodo = {
             ...todo,
             id: v4()
@@ -46,8 +49,32 @@ const App = () => {
         })
     }
 
-    const renderTodo = ({title, content, done, id}) => {
-        return <Todo key={id} title={title} content={content} done={done}/>
+    const editTodo = (id, changes) => {
+        setTodos((prevState) => {
+            return prevState.map(todo => {
+                if (id !== todo.id) {
+                    return todo;
+                }
+                return {
+                    ...todo,
+                    ...changes,
+                }
+            });
+        })
+    }
+
+    const toggleTodoDone = (id, done) => {
+        editTodo(id, {done});
+    }
+
+    const renderTodo = ({id, title, content, done}) => {
+        return <Todo
+            toggleDoneState={() =>toggleTodoDone(id, !done)}
+            key={id}
+            title={title}
+            content={content}
+            done={done}
+        />
     }
     return (
     <div className="App">

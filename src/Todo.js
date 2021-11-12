@@ -5,10 +5,12 @@ const  styles = require("./Todo.module.css");
 
 function Todo({title, content, done, dueTime, toggleDoneState}) {
     return (
-        <div className={classnames(styles.todo)}>
+        <div className={classnames(styles.todo, {[styles.done]: done})}>
             <div className={styles.todoTile}>{title}</div>
             <p className={styles.todoContent}>{content}</p>
-            <Button>Mark done</Button>
+            <Button onClick={toggleDoneState}>{
+                done? 'Mark undone': 'Mark done'
+            }</Button>
         </div>
     );
 }
