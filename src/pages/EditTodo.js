@@ -1,6 +1,5 @@
 import React from "react";
 import {useParams, useNavigate} from "react-router-dom";
-import TodoContext from "../contexts/TodoContext";
 import Input from "../components/Input";
 import Form from "../components/Form";
 import Button from "../components/Button";
@@ -8,7 +7,7 @@ import Button from "../components/Button";
 function EditTodo() {
     const {id} = useParams();
     const navigate = useNavigate();
-    const {getTodoById, editTodo} = React.useContext(TodoContext)
+    const {getTodoById, editTodo} = React.useContext([])
     const todo = React.useMemo(() => {
         return getTodoById(id)
     }, [getTodoById, id])
