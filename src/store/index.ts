@@ -1,8 +1,9 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunk from "redux-thunk";
 import todosReducer from "./todos";
+import productsReducer from "./products";
 
-const rootReducer = combineReducers({todo: todosReducer});
+const rootReducer = combineReducers({todo: todosReducer, product:productsReducer});
 
 const createWithMiddleware = applyMiddleware(thunk)(createStore);
 
