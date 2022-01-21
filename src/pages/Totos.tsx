@@ -1,12 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import Todo from "../Todo";
 import NewTodo from "../NewTodo";
 import {v4} from "uuid";
-import TodoContext from "../contexts/TodoContext";
+import {TTodo} from "../../types.t";
 
-function Todos() {
+const Todos: React.FC = () => {
 
-    const {todos, setTodos} = React.useContext(TodoContext)
+    // const {todos, setTodos} = React.useContext(TodoContext)
+    const [todos, setTodos] = useState<TTodo[]>([])
 
     const unDoneTodoCount = React.useMemo(() => {
         return todos.filter(todo => {
@@ -21,7 +22,7 @@ function Todos() {
         }
     }, [unDoneTodoCount])
 
-    const onNewTodo = (todo) => {
+    const onNewTodo = (todo: TTodo) => {
         if (!(todo.title || todo.content)) {
             return
         }
@@ -34,7 +35,7 @@ function Todos() {
         })
     }
 
-    const editTodo = (id, changes) => {
+    const editTodo = (id: string, changes: TTodo) => {
         setTodos((prevState) => {
             return prevState.map(todo => {
                 if (id !== todo.id) {
@@ -48,14 +49,24 @@ function Todos() {
         })
     }
 
-    const toggleTodoDone = (id, done) => {
-        editTodo(id, {done});
+    const toggleTodoDone = (id: string, done: boolean): void => {
+        setTodos((prevState) => {
+            return prevState.map(todo => {
+                if (id !== todo.id) {
+                    return todo;
+                }
+                return {
+                    ...todo,
+                    done,
+                }
+            });
+        })
     }
 
-    const renderTodo = ({id, title, content, done}) => {
+    const renderTodo: React.FC<TTodo> = ({id, title, content, done}) => {
         return <Todo
             id={id}
-            toggleDoneState={() =>toggleTodoDone(id, !done)}
+            toggleDoneState={() => toggleTodoDone(id, !done)}
             key={id}
             title={title}
             content={content}
