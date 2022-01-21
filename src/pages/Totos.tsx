@@ -1,16 +1,20 @@
-import React, {useState} from "react";
+import React from "react";
 import Todo from "../Todo";
 import NewTodo from "../NewTodo";
 import {v4} from "uuid";
 import {TTodo} from "../../types.t";
+import {useDispatch, useSelector} from "react-redux";
+import Button from "../components/Button";
+import {ADD_TODO, DECREMENT, EDIT_TODO, INCREMENT} from "../store/todos";
+import {TRootState} from "../store";
 
 const Todos: React.FC = () => {
 
-    // const {todos, setTodos} = React.useContext(TodoContext)
-    const [todos, setTodos] = useState<TTodo[]>([])
-
+    const dispatch = useDispatch();
+    const count = useSelector((state: TRootState) => state.todo.counter)
+    const todos = useSelector((state: TRootState) => state.todo.todos)
     const unDoneTodoCount = React.useMemo(() => {
-        return todos.filter(todo => {
+        return (todos as any).filter((todo: TTodo) => {
             return !todo.done
         }).length;
     }, [todos])
@@ -30,57 +34,39 @@ const Todos: React.FC = () => {
             ...todo,
             id: v4()
         }
-        setTodos((prevState) => {
-            return [...prevState, newTodo];
+        dispatch({
+            type: ADD_TODO,
+            payload: newTodo
         })
     }
 
-    const editTodo = (id: string, changes: TTodo) => {
-        setTodos((prevState) => {
-            return prevState.map(todo => {
-                if (id !== todo.id) {
-                    return todo;
-                }
-                return {
-                    ...todo,
-                    ...changes,
-                }
-            });
+    const toggleTodoDone = (todo:TTodo): void => {
+        dispatch({
+            type: EDIT_TODO,
+            payload: {...todo, done: !todo.done}
         })
     }
 
-    const toggleTodoDone = (id: string, done: boolean): void => {
-        setTodos((prevState) => {
-            return prevState.map(todo => {
-                if (id !== todo.id) {
-                    return todo;
-                }
-                return {
-                    ...todo,
-                    done,
-                }
-            });
-        })
-    }
-
-    const renderTodo: React.FC<TTodo> = ({id, title, content, done}) => {
+    const renderTodo: React.FC<TTodo> = (todo) => {
         return <Todo
-            id={id}
-            toggleDoneState={() => toggleTodoDone(id, !done)}
-            key={id}
-            title={title}
-            content={content}
-            done={done}
+            id={todo.id}
+            toggleDoneState={() => toggleTodoDone(todo)}
+            key={todo.id}
+            title={todo.title}
+            content={todo.content}
+            done={todo.done}
         />
     }
     return (
         <div>
-            <NewTodo onSubmit={onNewTodo} />
+            <NewTodo onSubmit={onNewTodo}/>
             <div className="todos">
                 {
                     todos.map(renderTodo)
                 }
             </div>
+            <Button onClick={e => dispatch({type: e.shiftKey ? DECREMENT : INCREMENT, payload: e.ctrlKey ? 10 : 1})}>Dispatch
+                increment {count}</Button>
 
         </div>
     );
