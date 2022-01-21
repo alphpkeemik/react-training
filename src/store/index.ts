@@ -1,14 +1,16 @@
-import { createStore, combineReducers } from "redux";
-import { composeWithDevTools } from "@redux-devtools/extension";
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import thunk from "redux-thunk";
 import todosReducer from "./todos";
 
-const rootReducer = combineReducers({todo: todosReducer})
+const rootReducer = combineReducers({todo: todosReducer});
 
-const store = createStore(
+const createWithMiddleware = applyMiddleware(thunk)(createStore);
+
+const store = createWithMiddleware(
     rootReducer,
-    /* @ts-ignore */
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
-)
+    // @ts-ignore
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+export type TRootState = ReturnType<typeof rootReducer>;
 
-export type TRootState = ReturnType<typeof rootReducer>
 export default store;

@@ -5,7 +5,7 @@ import {v4} from "uuid";
 import {TTodo} from "../../types.t";
 import {useDispatch, useSelector} from "react-redux";
 import Button from "../components/Button";
-import {ADD_TODO, DECREMENT, EDIT_TODO, INCREMENT} from "../store/todos";
+import {ADD_TODO, DECREMENT, EDIT_TODO, fetchAsyncNumber, INCREMENT} from "../store/todos";
 import {TRootState} from "../store";
 
 const Todos: React.FC = () => {
@@ -13,6 +13,7 @@ const Todos: React.FC = () => {
     const dispatch = useDispatch();
     const count = useSelector((state: TRootState) => state.todo.counter)
     const todos = useSelector((state: TRootState) => state.todo.todos)
+    const loading = useSelector((state: TRootState) => state.todo.loading)
     const unDoneTodoCount = React.useMemo(() => {
         return (todos as any).filter((todo: TTodo) => {
             return !todo.done
@@ -65,8 +66,12 @@ const Todos: React.FC = () => {
                     todos.map(renderTodo)
                 }
             </div>
-            <Button onClick={e => dispatch({type: e.shiftKey ? DECREMENT : INCREMENT, payload: e.ctrlKey ? 10 : 1})}>Dispatch
+            <Button disabled={loading}  onClick={e => dispatch({type: e.shiftKey ? DECREMENT : INCREMENT, payload: e.ctrlKey ? 10 : 1})}>Dispatch
                 increment {count}</Button>
+            <br />
+            <Button disabled={loading} onClick={() => {
+                dispatch(fetchAsyncNumber())
+            }}>Hit me </Button>
 
         </div>
     );
